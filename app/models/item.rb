@@ -18,7 +18,7 @@ class Item < ApplicationRecord
     validates :scheduled_delivery_id
   end
 
-  with_options presence: ture do
+  with_options presence: true do
     validates :name
     validates :information
     validates :price
