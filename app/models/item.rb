@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
-  
+  has_one_attached :image
+
   # AcitveHashのアソシエーション
   extend ActiveHash::Associations::ActiveRecordExtensions
     belongs_to :category
@@ -22,6 +23,7 @@ class Item < ApplicationRecord
     validates :name
     validates :information
     validates :price
+    validates :image
   end
 
   validates :price, numericality: {in: 300..9999999, message: "is out of setting range"}, 
