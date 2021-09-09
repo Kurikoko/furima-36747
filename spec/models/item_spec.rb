@@ -11,23 +11,23 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
 
-      it 'categoryの選択が2項目以降であれば出品できる' do
+      it 'categoryの選択が2項目め以降であれば出品できる' do
         another_item = @item if @item.category_id >= 2
         expect(another_item).to be_valid
       end
-      it 'statusの選択が2項目以降であれば出品できる' do
+      it 'statusの選択が2項目め以降であれば出品できる' do
         another_item = @item if @item.status_id >= 2
         expect(another_item).to be_valid
       end
-      it 'prefectureの選択が2項目以降であれば出品できる' do
+      it 'prefectureの選択が2項目め以降であれば出品できる' do
         another_item = @item if @item.prefecture_id >= 2
         expect(another_item).to be_valid
       end
-      it 'shipping_feeの選択が2項目または3項目めであれば出品できる' do
+      it 'shipping_feeの選択が2項目めまたは3項目めであれば出品できる' do
         another_item = @item if @item.shipping_fee_id == 2 || @item.shipping_fee_id == 3
         expect(another_item).to be_valid
       end
-      it 'scheduled_deliveryの選択が2項目以降であれば出品できる' do
+      it 'scheduled_deliveryの選択が2項目め以降であれば出品できる' do
         another_item = @item if @item.scheduled_delivery_id >= 2
         expect(another_item).to be_valid
       end
@@ -104,6 +104,12 @@ RSpec.describe Item, type: :model do
         @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is out of setting range')
+      end
+
+      it 'ユーザーに紐付いていない出品はできない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end
