@@ -11,15 +11,13 @@ class Item < ApplicationRecord
     belongs_to :scheduled_delivery
 
   # Validations
-  with_options presence: true do
-    validates :image
-    validates :name
-    validates :information
-    validates :price
-  end
+  validates :image,presence: true
+  validates :name, presence: true
+  validates :information, presence: true
 
-  validates :price, inclusion: {in: 300..9999999, message: "is out of setting range"},
-   numericality: { only_integer: true, message: "is invalid. Input half-width caracters"}
+  validates :price, presence: true,
+  inclusion: {in: 300..9999999, message: "is out of setting range"},
+  numericality: { only_integer: true, message: "is invalid. Input half-width caracters"}
 
   with_options numericality: { other_than: 1, message: "can't be blank"} do
     validates :category_id
