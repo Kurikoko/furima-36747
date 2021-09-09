@@ -28,7 +28,7 @@ RSpec.describe Item, type: :model do
         another_item = @item if @item.shipping_fee_id == 2 || @item.shipping_fee_id == 3
         expect(another_item).to be_valid
       end
-      it 'scheduled_deliverydの選択が2項目以降であれば出品できる' do
+      it 'scheduled_deliveryの選択が2項目以降であれば出品できる' do
         another_item = @item if @item.scheduled_delivery_id >= 2
         expect(another_item).to be_valid
       end
@@ -58,31 +58,31 @@ RSpec.describe Item, type: :model do
       end
 
       # ActiveHashデータの異常系テスト
-      it 'categoryが「--」では出品できない' do
+      it 'categoryが「---」では出品できない' do
         @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
-      it 'statusが「--」では出品できない' do
+      it 'statusが「---」では出品できない' do
         @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Status can't be blank")
       end
 
-      it 'shipping_feeが「--」では出品できない' do
+      it 'shipping_feeが「---」では出品できない' do
         @item.shipping_fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
       end
 
-      it 'prefectureが「--」では出品できない' do
+      it 'prefectureが「---」では出品できない' do
         @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
 
-      it 'scheduled_deliveryが「--」では出品できない' do
+      it 'scheduled_deliveryが「---」では出品できない' do
         @item.scheduled_delivery_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
