@@ -28,15 +28,11 @@ RSpec.describe User, type: :model do
     end
 
     context '新規登録できない場合' do
-      # nicknameの異常系テスト
-
       it 'nicknameが空では登録できない' do
         @user.nickname = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
-
-      # emailの異常系テスト
 
       it 'emailが空では登録できない' do
         @user.email = ''
@@ -55,8 +51,6 @@ RSpec.describe User, type: :model do
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
-
-      # passwordの異常系テスト
 
       it 'passwordが空では登録できない' do
         @user.password = ''
@@ -88,8 +82,6 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
 
-      # last_nameとfirst_nameの異常系テスト
-
       it 'last_nameが空では登録できない' do
         @user.last_name = ''
         @user.valid?
@@ -111,8 +103,6 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('First name is invalid. Input full-width characters')
       end
 
-      # last_name_kanaとfirst_name_kanaの異常系テスト
-
       it 'last_name_kanaが空では登録できない' do
         @user.last_name_kana = ''
         @user.valid?
@@ -133,8 +123,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('First name kana is invalid. Input full-width katakana characters')
       end
-
-      # birthdayの異常系テスト
 
       it 'birthdayが空では登録できない' do
         @user.birthday = ''
