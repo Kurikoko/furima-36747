@@ -11,7 +11,6 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
 
-      # ActiveHashデータの正常系テスト
       it 'categoryの選択が2項目以降であれば出品できる' do
         another_item = @item if @item.category_id >= 2
         expect(another_item).to be_valid
@@ -33,7 +32,6 @@ RSpec.describe Item, type: :model do
         expect(another_item).to be_valid
       end
 
-      # priceの正常系テスト
       it 'priceが300円以上かつ9999999円以下かつ半角数字であれば出品できる' do
         another_item = @item if @item.price >= 300 && @item.price <= 9_999_999 && @item.price.is_a?(Integer)
         expect(another_item).to be_valid
@@ -57,7 +55,6 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Information can't be blank")
       end
 
-      # ActiveHashデータの異常系テスト
       it 'categoryが「---」では出品できない' do
         @item.category_id = 1
         @item.valid?
@@ -88,7 +85,6 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
       end
 
-      # priceの異常系テスト
       it 'priceが空では登録できない' do
         @item.price = nil
         @item.valid?

@@ -2,7 +2,6 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  # AcitveHashのアソシエーション
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :status
@@ -10,7 +9,6 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :scheduled_delivery
 
-  # Validations
   validates :image, presence: true
   validates :name, presence: true
   validates :information, presence: true
