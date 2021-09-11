@@ -6,17 +6,18 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # @oreder = Oreder.create(order_params)
-    # if @order.save
-      # redirect_to root_path
-    # else
-      # render :index
-    # end
+    @order = Order.new(order_params)
+    if @order.valid?
+      @order.save
+      redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private
-  # def order_params
-    # params.permit(:order).permit().merge(user_id: current_user.id, item_id: @item.id)
-  # end
+  def order_params
+    params.permit().merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+  end
 
 end
