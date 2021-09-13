@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
       @order_destination.save
       return redirect_to root_path
     else
-      render :index
+      redirect_to item_orders_path
     end
   end
 
