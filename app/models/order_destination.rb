@@ -14,7 +14,7 @@ class OrderDestination
 
   with_options presence: true do
     validates :phone_number, numericality: { only_integer: true, message: 'is invalid. Input only number' },
-                             length: { minimum: 11, message: 'is too short' }
+                             length: { in: 10..11, message: 'is too short' }
   end
 
   with_options presence: { message: 'must exist' } do
