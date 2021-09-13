@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
-  before_action :set_params, only: [:index]
+  before_action :set_params, only: [:index, :create]
   before_action :redirect_seller_user, only: [:index]
   before_action :redirect_sold_out_item, only: [:index]
 
@@ -10,7 +10,6 @@ class OrdersController < ApplicationController
 
   def create
     @order_destination = OrderDestination.new(order_params)
-    @item = Item.find(order_params[:item_id])
     if @order_destination.valid?
       pay_item
       @order_destination.save
