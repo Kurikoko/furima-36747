@@ -1,8 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
+  before_action :set_params, only: [:index]
+  before_action :redirect_seller_user, only: [:index]
+  before_action :redirect_sold_out_item, only: [:index]
 
   def index
     @order_destination = OrderDestination.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
@@ -30,4 +33,22 @@ class OrdersController < ApplicationController
       currency: 'jpy'
     )
   end
+
+  def set_params
+    @item = Item.find(params[:item_id])
+  end
+
+  def redirect_seller_user
+    if current_user.id == @item.user_id 
+      redirect_to root_path
+    end
+  end
+
+  def redirect_sold_out_item
+     if @item.order.present?
+      redirect_to root_path
+     end
+  end
+
+  
 end

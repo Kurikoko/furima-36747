@@ -126,12 +126,12 @@
           <div class='item-img-content'>
             <%= image_tag item.image, class: "item-img" %>
 
-          <%# 以下今後購入機能実装時反映の為、コメントアウト及び、コメントを残す %>
-            <%# 商品が売れていればsold outを表示しましょう %>
-            <%# <div class='sold-out'>
+          <% if item.order.present? %> 
+            <div class='sold-out'>
               <span>Sold Out!!</span>
-            </div> %>
-            <%# //商品が売れていればsold outを表示しましょう %>
+            </div>
+          <% end %>
+
           </div>
           <div class='item-info'>
             <h3 class='item-name'>
